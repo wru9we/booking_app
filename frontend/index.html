@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Booking API</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Booking API</h1>
+    <p class="subtitle">Простой UI для всех эндпоинтов</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Auth</h2>
+      <div class="row">
+        <label>Email <input id="email" type="email" value="test@example.com" /></label>
+        <label>Password <input id="password" type="password" value="password123" /></label>
+      </div>
+      <div class="actions">
+        <button data-action="register">Register</button>
+        <button data-action="login">Login</button>
+        <button data-action="logout" class="secondary">Logout</button>
+        <button data-action="me" class="secondary">Me</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Отели</h2>
+      <div class="actions">
+        <button data-action="hotels">GET /hotels</button>
+      </div>
+      <div id="hotels-table" class="table-wrap"></div>
+    </section>
+
+    <section class="card">
+      <h2>Бронирования</h2>
+      <div class="actions">
+        <button data-action="my-bookings">Мои брони</button>
+        <button data-action="booking-one" class="secondary">GET /bookings/one</button>
+      </div>
+      <div class="row">
+        <label>Booking ID <input id="booking-id" type="number" min="1" value="1" /></label>
+        <button data-action="booking-by-id">GET /bookings/{id}</button>
+      </div>
+      <hr />
+      <h3>Создать бронь</h3>
+      <div class="row">
+        <label>Room ID <input id="room-id" type="number" min="1" value="1" /></label>
+        <label>Date from <input id="date-from" type="date" /></label>
+        <label>Date to <input id="date-to" type="date" /></label>
+        <button data-action="add-booking">POST /bookings</button>
+      </div>
+      <div id="bookings-table" class="table-wrap"></div>
+    </section>
+
+    <section class="card">
+      <h2>Ответ API</h2>
+      <pre id="output">Готово. Нажмите кнопку.</pre>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
