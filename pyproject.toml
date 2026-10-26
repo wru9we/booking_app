@@ -1,5 +1,5 @@
 [project]
-name = "course"
+name = "app"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -20,4 +20,5 @@ dependencies = [
     "sqladmin>=0.32.0",
     "sqlalchemy>=2.1.3",
     "uvicorn[standard]>=0.54.0",
+    "gunicorn>=23.0.0",
 ]

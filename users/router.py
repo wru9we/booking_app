@@ -1,3 +1,6 @@
+import asyncio
+from fastapi_cache.decorator import cache
+
 from fastapi import APIRouter, Depends, HTTPException, Response, status
 from users.auth import authenticate_user, create_access_token, get_password_hash
 from users.dependencies import get_current_user
@@ -36,5 +39,7 @@ async def logout_user(response: Response):
     response.delete_cookie("booking_access_token")
 
 @router.get("/me")
+@cache(expire=20)
 async def get_me(current_user: Users = Depends(get_current_user)):
+    await asyncio.sleep(1)
     return current_user
