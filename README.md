@@ -10,6 +10,8 @@
 - **JWT** в HttpOnly-cookies (`python-jose` + `passlib`/`bcrypt`)
 - **SQLAdmin** по адресу `/admin`
 - Простой фронтенд в `frontend/`
+- **Redis** для кэширования данных
+- **Docker** для запуска
 
 ## Требования
 
