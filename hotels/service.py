@@ -3,5 +3,3 @@ from service.base import BaseService
 
 class HotelService(BaseService):
     model = Hotels
-
-     

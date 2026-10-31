@@ -17,26 +17,28 @@
 
 - Python 3.14+
 - PostgreSQL
+- Redis
 - [uv](https://github.com/astral-sh/uv) (рекомендуется)
 
 ## Установка
 
 ```bash
-uv sync
-cp .env.example .env   # или создайте .env вручную
+.env-non-dev # некоторые данные уже есть, необходимо заполнить SECRET_KEY и ALGORITHM
+docker compose build
 ```
 
 
 Применить миграции:
 
 ```bash
-alembic upgrade head
+docker compose exec booking alembic revision --autogenerate -m "initial"
+docker compose exec booking alembic upgrade head
 ```
 
 ## Запуск
 
 ```bash
-uv run python main.py
+docker compose up
 ```
 
 ## Обзор API
@@ -64,4 +66,7 @@ frontend/   # демо-UI
 migrations/ # Alembic
 main.py     # точка входа + SQLAdmin
 config.py   # настройки из .env
+.env-non-dev # для Docker
+Dockerfile # докер без сервисов
+docker-compose.yml # докер с сервисами
 ```

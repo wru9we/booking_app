@@ -16,6 +16,7 @@ from fastapi_cache.decorator import cache
 
 from redis import asyncio as aioredis
 
+from config import settings
 from bookings.models import Bookings
 from datebase import engine, async_session_maker
 from bookings.router import router as router_bookings
@@ -28,7 +29,7 @@ from rooms.router import router as router_rooms
 
 @asynccontextmanager
 async def lifespan(_: FastAPI) -> AsyncIterator[None]:
-    redis = aioredis.from_url("redis://localhost")
+    redis = aioredis.from_url(f"redis://{settings.redis_host}:{settings.redis_port}")
     FastAPICache.init(RedisBackend(redis), prefix="cache")
     yield
 
