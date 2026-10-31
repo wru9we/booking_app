@@ -1,10 +1,12 @@
 from datetime import date
 
-from sqlalchemy import select, delete, insert, func, and_, or_
+from sqlalchemy import and_, func, insert, or_, select
+
 from bookings.models import Bookings
+from datebase import async_session_maker
 from rooms.models import Rooms
 from service.base import BaseService
-from datebase import engine, async_session_maker
+
 
 class BookingService(BaseService):
     model = Bookings
@@ -45,14 +47,12 @@ class BookingService(BaseService):
                 )
             )
         ).cte("booked_rooms")
-        
         '''
         SELECT rooms.quantity - COUNT(booked_room.room_id) FROM rooms
             LEFT JOIN booked_rooms ON booked_rooms.room_id = rooms.id
             WHERE rooms.id = 1
             GROUP BY rooms.quantity, booked_rooms.room_id
-        '''
-        
+        '''                
         get_rooms_left = select(
             (Rooms.quantity - func.count(booked_rooms.c.room_id)).label("rooms_left")
                 ).select_from(Rooms).join(

@@ -1,5 +1,7 @@
-from sqlalchemy import JSON, Column, Computed, Date, ForeignKey, Integer, String
+from sqlalchemy import Column, Integer, String
+
 from datebase import Base
+
 
 class Users(Base):
     __tablename__ = "users"

@@ -1,31 +1,27 @@
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 
-
+import uvicorn
 from fastapi import FastAPI
-from sqladmin import Admin, ModelView
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
-import uvicorn
-
-
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
-from fastapi_cache.decorator import cache
-
 from redis import asyncio as aioredis
+from sqladmin import Admin, ModelView
 
-from config import settings
 from bookings.models import Bookings
-from datebase import engine, async_session_maker
 from bookings.router import router as router_bookings
+from config import settings
+from datebase import async_session_maker, engine
+from hotels.models import Hotels
 from hotels.router import router as router_hotels
 from rooms.models import Rooms
-from users.models import Users
-from hotels.models import Hotels
-from users.router import router as router_users
 from rooms.router import router as router_rooms
+from users.models import Users
+from users.router import router as router_users
+
 
 @asynccontextmanager
 async def lifespan(_: FastAPI) -> AsyncIterator[None]:

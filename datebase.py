@@ -3,7 +3,6 @@ from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
 from config import settings
 
-
 DATEBASE_URL = settings.DATEBASE_URL
 
 engine = create_async_engine(DATEBASE_URL)

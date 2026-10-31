@@ -1,7 +1,6 @@
-from bookings.models import Bookings
-from datebase import async_session_maker
-
 from sqlalchemy import insert, select
+
+from datebase import async_session_maker
 
 
 class BaseService:

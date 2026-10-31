@@ -2,9 +2,7 @@ import asyncio
 from datetime import date
 
 from fastapi import APIRouter, Depends
-
 from fastapi_cache.decorator import cache
-
 
 from bookings.schemas import SBooking
 from bookings.service import BookingService

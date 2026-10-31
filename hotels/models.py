@@ -1,5 +1,7 @@
 from sqlalchemy import JSON, Column, Integer, String
+
 from datebase import Base
+
 
 class Hotels(Base):
     __tablename__ = "hotels"

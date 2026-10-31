@@ -1,6 +1,6 @@
 import asyncio
-from fastapi import APIRouter
 
+from fastapi import APIRouter
 from fastapi_cache.decorator import cache
 
 from rooms.service import RoomsService

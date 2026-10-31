@@ -1,16 +1,14 @@
 import asyncio
-from fastapi_cache.decorator import cache
 
 from fastapi import APIRouter, Depends, HTTPException, Response, status
-from users.auth import authenticate_user, create_access_token, get_password_hash
+from fastapi_cache.decorator import cache
+
+from users.auth import (authenticate_user, create_access_token,
+                        get_password_hash)
 from users.dependencies import get_current_user
 from users.models import Users
-from users.service import UserService
-
 from users.schemas import SUserAuth
-
-from users.auth import verify_password
-
+from users.service import UserService
 
 router = APIRouter(
     prefix="/auth",

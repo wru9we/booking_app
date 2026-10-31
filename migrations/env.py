@@ -1,21 +1,20 @@
-from logging.config import fileConfig
 import asyncio
 import sys
+from logging.config import fileConfig
 from os.path import abspath, dirname
 
+from alembic import context
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
-from alembic import context
-
 sys.path.insert(0, dirname(dirname(abspath(__file__))))
 
-from datebase import Base, DATEBASE_URL
-from hotels.models import Hotels
 from bookings.models import Bookings
-from users.models import Users
+from datebase import DATEBASE_URL, Base
+from hotels.models import Hotels
 from rooms.models import Rooms
+from users.models import Users
 
 config = context.config
 
