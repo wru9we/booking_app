@@ -22,6 +22,7 @@ from rooms.router import router as router_rooms
 from users.models import Users
 from users.router import router as router_users
 from images.router import router as router_images
+from pages.router import router as router_pages
 
 
 @asynccontextmanager
@@ -49,11 +50,7 @@ app.include_router(router_hotels)
 app.include_router(router_rooms)
 app.include_router(router_images)
 
-
-@app.get("/")
-async def root():
-    return FileResponse("frontend/index.html") # front
-
+app.include_router(router_pages)
 
 app.mount("/static", StaticFiles(directory="static"), "static")
 
