@@ -3,9 +3,11 @@ from datetime import date
 
 from fastapi import APIRouter, Depends
 from fastapi_cache.decorator import cache
+from pydantic import parse_obj_as
 
 from bookings.schemas import SBooking
 from bookings.service import BookingService
+from tasks.tasks import send_booking_confirmation_template
 from users.dependencies import get_current_user
 from users.models import Users
 
@@ -36,4 +38,7 @@ async def add_booking(
     date_to: date,
     user: Users = Depends(get_current_user),
 ):
-    await BookingService.add(user["id"], room_id, date_from, date_to)
+    booking = await BookingService.add(user["id"], room_id, date_from, date_to)
+    booking_dict = parse_obj_as(SBooking, booking).dict()
+    send_booking_confirmation_template.delay(booking_dict, user.email)
+    return booking_dict

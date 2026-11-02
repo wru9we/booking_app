@@ -8,6 +8,11 @@ class Settings(BaseSettings):
     DB_NAME: str
     DB_PASSWORD: str
 
+    SMTP_HOST: str
+    SMTP_PORT: int
+    SMTP_USER: str
+    SMTP_PASS: str
+
     redis_host: str 
     redis_port: int 
 
