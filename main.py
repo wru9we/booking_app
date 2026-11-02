@@ -11,6 +11,7 @@ from fastapi_cache.backends.redis import RedisBackend
 from redis import asyncio as aioredis
 from sqladmin import Admin, ModelView
 
+from admin.views import BookingsAdmin, HotelsAdmin, RoomsAdmin, UsersAdmin
 from bookings.models import Bookings
 from bookings.router import router as router_bookings
 from config import settings
@@ -23,6 +24,7 @@ from users.models import Users
 from users.router import router as router_users
 from images.router import router as router_images
 from pages.router import router as router_pages
+from admin.auth import authentication_backend
 
 
 @asynccontextmanager
@@ -55,68 +57,18 @@ app.include_router(router_pages)
 app.mount("/static", StaticFiles(directory="static"), "static")
 
 
-admin = Admin(app, engine, session_maker=async_session_maker)
+admin = Admin(app, engine, session_maker=async_session_maker, authentication_backend=authentication_backend)
 
 
-class UserAdmin(ModelView, model=Users):
-    column_list = [Users.id, Users.email]
-
-
-class BookingAdmin(ModelView, model=Bookings):
-    column_list = [
-        Bookings.id,
-        Bookings.room_id,
-        Bookings.user_id,
-        Bookings.date_from,
-        Bookings.date_to,
-        Bookings.price,
-        Bookings.total_days,
-        Bookings.total_price,
-    ]
-
-
-class RoomAdmin(ModelView, model=Rooms):
-    column_list = [
-        Rooms.id,
-        Rooms.hotel_id,
-        Rooms.name,
-        Rooms.description,
-        Rooms.price,
-        Rooms.services,
-        Rooms.quantity,
-        Rooms.image_id,
-    ]
-
-
-class HotelAdmin(ModelView, model=Hotels):
-    column_list = [
-        Hotels.id,
-        Hotels.name,
-        Hotels.location,
-        Hotels.services,
-        Hotels.rooms_quantity,
-        Hotels.image_id,
-    ]
-
-
-admin.add_view(UserAdmin)
-admin.add_view(HotelAdmin)
-admin.add_view(RoomAdmin)
-admin.add_view(BookingAdmin)
+admin.add_view(UsersAdmin)
+admin.add_view(HotelsAdmin)
+admin.add_view(RoomsAdmin)
+admin.add_view(BookingsAdmin)
 
 if __name__ == "__main__":
     uvicorn.run(
         "main:app",
         host="127.0.0.1",
         port=8000,
-        reload=True,
-        reload_dirs=[
-            "bookings",
-            "hotels",
-            "rooms",
-            "users",
-            "service",
-            "frontend",
-            "migrations",
-        ],
+        reload=True
     )
