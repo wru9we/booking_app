@@ -1,9 +1,9 @@
 import asyncio
 from datetime import date
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi_cache.decorator import cache
-from pydantic import parse_obj_as
+from pydantic import TypeAdapter
 
 from bookings.schemas import SBooking
 from bookings.service import BookingService
@@ -39,6 +39,9 @@ async def add_booking(
     user: Users = Depends(get_current_user),
 ):
     booking = await BookingService.add(user["id"], room_id, date_from, date_to)
-    booking_dict = parse_obj_as(SBooking, booking).dict()
-    send_booking_confirmation_template.delay(booking_dict, user.email)
+    if not booking:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT)
+    
+    booking_dict = TypeAdapter(SBooking).validate_python(booking).model_dump()
+    send_booking_confirmation_template.delay(booking_dict, user["email"])
     return booking_dict

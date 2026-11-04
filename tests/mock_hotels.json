@@ -1,0 +1,50 @@
+[
+    {
+      "id": 1,
+      "name": "Cosmos Collection Altay Resort",
+      "location": "Республика Алтай, Майминский район, село Усть-Муны",
+      "services": ["Бесплатный Wi‑Fi", "Парковка"],
+      "rooms_quantity": 15,
+      "image_id": 1
+    },
+    {
+      "id": 2,
+      "name": "Отель Пример 2",
+      "location": "Москва",
+      "services": ["Wi‑Fi"],
+      "rooms_quantity": 23,
+      "image_id": 2
+    },
+    {
+      "id": 3,
+      "name": "Отель Пример 3",
+      "location": "Санкт-Петербург",
+      "services": [],
+      "rooms_quantity": 30,
+      "image_id": 3
+    },
+    {
+      "id": 4,
+      "name": "Отель Пример 4",
+      "location": "Казань",
+      "services": ["Wi‑Fi"],
+      "rooms_quantity": 55,
+      "image_id": 4
+    },
+    {
+      "id": 5,
+      "name": "Отель Пример 5",
+      "location": "Сочи",
+      "services": [],
+      "rooms_quantity": 22,
+      "image_id": 5
+    },
+    {
+      "id": 6,
+      "name": "Отель Пример 6",
+      "location": "Калининград",
+      "services": [],
+      "rooms_quantity": 45,
+      "image_id": 6
+    }
+  ]

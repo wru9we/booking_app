@@ -14,8 +14,8 @@ class Bookings(Base):
     date_from = Column(Date, nullable=False)
     date_to = Column(Date, nullable=False)
     price = Column(Integer, nullable=False)
-    total_days = Column(Integer, Computed("date_to - date_from"))
-    total_price = Column(Integer, Computed("(date_to - date_from) * price"))
+    total_days = Column(Integer, Computed("date_to - date_from", persisted=True))
+    total_price = Column(Integer, Computed("(date_to - date_from) * price", persisted=True))
 
 
     user = relationship("Users", back_populates="booking")

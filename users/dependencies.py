@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from fastapi import Depends, HTTPException, Request, status
 from jose import JWTError, jwt
@@ -23,7 +23,7 @@ async def get_current_user(token: str = Depends(get_token)):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
 
     exipre: str = payload.get("exp")
-    if (not exipre) or (int(exipre) < datetime.utcnow().timestamp()):
+    if (not exipre) or (int(exipre) < datetime.now(timezone.utc).timestamp()):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
 
     user_id: str = payload.get("sub")
